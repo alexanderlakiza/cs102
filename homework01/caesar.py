@@ -10,7 +10,7 @@ def encrypt_caesar(plaintext):
     ''
     """
     ciphertext = ''
-    symbols = '1234567890!@#$%^&*()_-=+.'
+    symbols = '1234567890!"№;%:?*()-=_+.,'
     for ch in plaintext:
         if ch in symbols:
             ciphertext += ch
@@ -20,7 +20,6 @@ def encrypt_caesar(plaintext):
             ciphertext += chr((ord(ch) + 3 - 97) % 26 + 97)
 
     return ciphertext
-
 # зашифровали
 
 
