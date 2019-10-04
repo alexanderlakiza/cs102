@@ -11,7 +11,17 @@ def is_prime(n):
     >>> is_prime(8)
     False
     """
-    return (2 ** n - 2) % n == 0
+    if n < 2:
+        return False
+    elif n == 2:
+        return True
+    elif n % 2 == 0:
+        return False
+    else:
+        for x in range(3, int(n**0.5)):
+            if n % x == 0:
+                return False
+    return True
 
 
 def gcd(a, b):
