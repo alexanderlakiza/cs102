@@ -1,7 +1,5 @@
 import random
 
-import math
-
 def is_prime(n):
     """
     Tests to see if a number is prime.
@@ -13,7 +11,7 @@ def is_prime(n):
     >>> is_prime(8)
     False
     """
-    return (math.factorial(n - 1) + 1) % n == 0
+    return (2 ** n - 2) % n == 0
 
 
 def gcd(a, b):
@@ -25,10 +23,9 @@ def gcd(a, b):
     >>> gcd(3, 7)
     1
     """
-    if b == 0:
-        return a
-    else:
-        return gcd(b, a % b)
+    while b:
+        a, b = b, a % b
+    return a
 
 
 def multiplicative_inverse(e, phi):
