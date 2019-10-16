@@ -1,4 +1,5 @@
 from typing import Tuple, List, Set, Optional
+import random
 
 
 def read_sudoku(filename: str) -> List[List[str]]:
@@ -83,10 +84,10 @@ def find_empty_positions(grid):
     >>> find_empty_positions([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']])
     (2, 0)
     """
-    for x in range(len(grid)):
-        for y in range(len(grid)):
-            if grid[x][y] == '.':
-                return (x, y)
+    for i in range(len(grid)):
+        for j in range(len(grid)):
+            if grid[i][j] == '.':
+                return (i, j)
 
 
 def find_possible_values(grid, pos):
@@ -100,10 +101,14 @@ def find_possible_values(grid, pos):
     >>> values == {'2', '5', '9'}
     True
     """
-    pass
+    values = set('123456789')
+    values -= set(get_row(grid, pos))
+    values -= set(get_col(grid, pos))
+    values -= set(get_block(grid, pos))
+    return values
 
 
-def solve(grid: List[List[str]]) -> Optional[List[List[str]]]:
+def solve(grid):
     """ Решение пазла, заданного в grid """
     """ Как решать Судоку?
         1. Найти свободную позицию
@@ -116,16 +121,48 @@ def solve(grid: List[List[str]]) -> Optional[List[List[str]]]:
     >>> solve(grid)
     [['5', '3', '4', '6', '7', '8', '9', '1', '2'], ['6', '7', '2', '1', '9', '5', '3', '4', '8'], ['1', '9', '8', '3', '4', '2', '5', '6', '7'], ['8', '5', '9', '7', '6', '1', '4', '2', '3'], ['4', '2', '6', '8', '5', '3', '7', '9', '1'], ['7', '1', '3', '9', '2', '4', '8', '5', '6'], ['9', '6', '1', '5', '3', '7', '2', '8', '4'], ['2', '8', '7', '4', '1', '9', '6', '3', '5'], ['3', '4', '5', '2', '8', '6', '1', '7', '9']]
     """
-    pass
+    pos = find_empty_positions(grid)
+    if not pos:
+        return grid
+    for value in find_possible_values(grid, pos):
+        grid[pos[0]][pos[1]] = value
+        solution = solve(grid)
+        if solution:
+            return solution
+    grid[pos[0]][pos[1]] = '.'
+    return None
 
 
-def check_solution(solution: List[List[str]]) -> bool:
-    """ Если решение solution верно, то вернуть True, в противном случае False """
-    # TODO: Add doctests with bad puzzles
-    pass
+def check_solution(solution):
+    """ Если решение solution верно, то вернуть True, в противном случае False
+
+    >>> solution = read_sudoku('lolpuzzle.txt')
+    >>> check_solution(solution)
+    False
+    >>> solution = read_sudoku('lolpuzzle2.txt')
+    >>> check_solution(solution)
+    False
+    """
+    for row in range(len(solution)):
+        row_values = set(get_row(solution, (row, 0)))
+        if row_values != set('123456789'):
+            return False
+
+    for col in range(len(solution)):
+        col_values = set(get_col(solution, (0, col)))
+        if col_values != set('123456789'):
+            return False
+
+    for row in range(0, 6, 3):
+        for col in range(0, 6, 3):
+            block_values = set(get_block(solution, (row, col)))
+            if block_values != set('123456789'):
+                return False
+
+    return True
 
 
-def generate_sudoku(N: int) -> List[List[str]]:
+def generate_sudoku(N):
     """ Генерация судоку заполненного на N элементов
 
     >>> grid = generate_sudoku(40)
@@ -147,7 +184,15 @@ def generate_sudoku(N: int) -> List[List[str]]:
     >>> check_solution(solution)
     True
     """
-    pass
+    grid = solve([['.'] * 9 for elem in range(9)])
+    more_dots = 81 - min(81, max(0, N))
+    while more_dots:
+        row = random.randint(0, 8)
+        col = random.randint(0, 8)
+        if grid[row][col] != '.':
+            grid[row][col] = '.'
+            more_dots -= 1
+    return grid
 
 
 if __name__ == '__main__':

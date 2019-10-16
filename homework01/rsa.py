@@ -1,11 +1,8 @@
 import random
 
-import math
-
 def is_prime(n):
     """
     Tests to see if a number is prime.
-
     >>> is_prime(2)
     True
     >>> is_prime(11)
@@ -13,29 +10,36 @@ def is_prime(n):
     >>> is_prime(8)
     False
     """
-    return (math.factorial(n - 1) + 1) % n == 0
+    if n < 2:
+        return False
+    elif n == 2:
+        return True
+    elif n % 2 == 0:
+        return False
+    else:
+        for x in range(3, int(n**0.5)):
+            if n % x == 0:
+                return False
+    return True
 
 
 def gcd(a, b):
     """
     Euclid's algorithm for determining the greatest common divisor.
-
     >>> gcd(12, 15)
     3
     >>> gcd(3, 7)
     1
     """
-    if b == 0:
-        return a
-    else:
-        return gcd(b, a % b)
+    while b:
+        a, b = b, a % b
+    return a
 
 
 def multiplicative_inverse(e, phi):
     """
     Euclid's extended algorithm for finding the multiplicative
     inverse of two numbers.
-
     >>> multiplicative_inverse(7, 40)
     23
     """
@@ -125,3 +129,4 @@ if __name__ == '__main__':
     print("Decrypting message with public key ", public, " . . .")
     print("Your message is:")
     print(decrypt(public, encrypted_msg))
+
