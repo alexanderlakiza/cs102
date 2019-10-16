@@ -10,14 +10,13 @@ def encrypt_caesar(plaintext):
     ''
     """
     ciphertext = ''
-    symbols = '1234567890!"№;%:?*()-=_+.,'
     for ch in plaintext:
-        if ch in symbols:
+        if not ch.isalpha():
             ciphertext += ch
-        elif ch.isupper():
-            ciphertext += chr((ord(ch) + 3 - 65) % 26 + 65)
-        elif ch.islower():
-            ciphertext += chr((ord(ch) + 3 - 97) % 26 + 97)
+        elif 'A' <= ch <= 'Z':
+            ciphertext += chr((ord(ch) + 3 - ord('A')) % 26 + ord('A'))
+        elif 'a' <= ch <= 'z':
+            ciphertext += chr((ord(ch) + 3 - ord('a')) % 26 + ord('a'))
 
     return ciphertext
 # зашифровали
@@ -36,13 +35,12 @@ def decrypt_caesar(ciphertext):
     ''
     """
     plaintext = ''
-    symbols = '1234567890!@#$%^&*()_+-=.'
     for ch in ciphertext:
-        if ch in symbols:
+        if not ch.isalpha():
             plaintext += ch
-        elif ch.isupper():
-            plaintext += chr((ord(ch) - 3 - 65) % 26 + 65)
-        elif ch.islower():
-            plaintext += chr((ord(ch) - 3 - 97) % 26 + 97)
+        elif 'A' <= ch <= 'Z':
+            plaintext += chr((ord(ch) - 3 - ord('A')) % 26 + ord('A'))
+        elif 'a' <= ch <= 'z':
+            plaintext += chr((ord(ch) - 3 - ord('a')) % 26 + ord('a'))
     return plaintext
 # расшифровали
