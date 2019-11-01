@@ -10,9 +10,11 @@ class Console(UI):
     def __init__(self, life: GameOfLife) -> None:
         super().__init__(life)
 
+
     def draw_borders(self, screen) -> None:
         """ Отобразить рамку. """
         screen.border('|', '|', '-', '-', '+', '+', '+', '+')
+
 
     def draw_grid(self, screen) -> None:
         """ Отобразить состояние клеток. """
@@ -21,12 +23,12 @@ class Console(UI):
                 if self.life.curr_generation[i][j] == 1:
                     screen.addstr(i + 1, j + 1, '*')
 
+
     def run(self) -> None:
         screen = curses.initscr()
         # PUT YOUR CODE HERE
         curses.noecho()
-
-        sleep_time = 0.5
+        sleep_time = 0.3
         while self.life.is_changing and not self.life.is_max_generations_exceed:
             screen.clear()
             self.draw_borders(screen)
@@ -35,8 +37,6 @@ class Console(UI):
             time.sleep(sleep_time)
             self.life.step()
 
-        time.sleep(sleep_time)
-        screen.clear()
         time.sleep(1)
         
         curses.endwin()
