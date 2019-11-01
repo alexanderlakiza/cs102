@@ -13,11 +13,11 @@ test_get_neighbours_for_upper_right_corner (test_life_proto.TestGameOfLife) ... 
 test_get_neighbours_for_upper_side (test_life_proto.TestGameOfLife) ... ok
 
 ----------------------------------------------------------------------
-Ran 12 tests in 0.356s
+Ran 12 tests in 0.304s
 
 OK
 ............
 ----------------------------------------------------------------------
-Ran 12 tests in 0.014s
+Ran 12 tests in 0.015s
 
 OK
