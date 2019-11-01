@@ -29,6 +29,7 @@ class GameOfLife:
         # Текущее число поколений
         self.n_generation = 1
 
+
     def create_grid(self, randomize: bool=False) -> Grid:
         # Copy from previous assignment
         grid = [[0 for i in range(self.cols)] for j in range(self.rows)]
@@ -78,6 +79,7 @@ class GameOfLife:
         self.curr_generation = self.get_next_generation()
         self.n_generation += 1
 
+
     @property
     def is_max_generations_exceed(self) -> bool:
         """
@@ -92,6 +94,7 @@ class GameOfLife:
         Изменилось ли состояние клеток с предыдущего шага.
         """
         return self.curr_generation != self.prev_generation
+
 
     @staticmethod
     def from_file(filename: pathlib.Path) -> 'GameOfLife':
@@ -112,7 +115,6 @@ class GameOfLife:
             grid.append(line)
         game.curr_generation = deepcopy(grid)
         return game
-
 
 
     def save(filename: pathlib.Path) -> None:
