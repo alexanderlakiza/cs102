@@ -17,11 +17,11 @@ test_is_not_changing (test_life.TestGameOfLife) ... ok
 test_prev_generation_is_correct (test_life.TestGameOfLife) ... ok
 
 ----------------------------------------------------------------------
-Ran 16 tests in 0.012s
+Ran 16 tests in 0.017s
 
 OK
 ................
 ----------------------------------------------------------------------
-Ran 16 tests in 0.011s
+Ran 16 tests in 0.017s
 
 OK
