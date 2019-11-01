@@ -100,7 +100,7 @@ class GameOfLife:
         """
         grid = []
         f = open(filename, 'r')
-        lines = f.read().strip('\n')
+        lines = f.read().split('\n')
         rows = len(lines)
         cols = len(lines[0].strip()) 
         game = GameOfLife(size=(rows, cols), randomize=False)
