@@ -58,14 +58,14 @@ class GameOfLife:
 
             # Отрисовка списка клеток
             # Выполнение одного шага игры (обновление состояния ячеек)
-            self.draw_grid(self.grid)
-            self.grid = self.get_next_generation(self.grid)
+            self.draw_grid()
+            self.grid = self.get_next_generation()
 
             pygame.display.flip()
             clock.tick(self.speed)
         pygame.quit()
 
-    def create_grid(self, randomize: bool=False) -> Grid:
+    def create_grid(self, randomize: bool=True) -> Grid:
         """
         Создание списка клеток.
 
@@ -83,7 +83,7 @@ class GameOfLife:
         out : Grid
             Матрица клеток размером `cell_height` х `cell_width`.
         """
-        grid = [[0 for i in range(self.cell_width)] for j in range(self.cell_height)]
+        grid = [[0 for i in range(self.cell_height)] for j in range(self.cell_width)]
         if randomize:
             for i in range(self.cell_width):
                 for j in range(self.cell_height):
@@ -126,16 +126,13 @@ class GameOfLife:
         out : Cells
             Список соседних клеток.
         """
-        Cells = []
-        x, y = cell
-        n = self.cell_height - 1
-        m = self.cell_width - 1
-        for i in range(x - 1, x + 2):
-            for j in range(y - 1, y + 2):
-                if not (0 <= i <= n and 0 <= j <= m) or (i == x and j == y):
-                    continue
-                Cells.append(self.grid[i][j])
-        return Cells
+        i, j = cell
+
+        neighbours = [self.grid[x][y] for x in range(i - 1, i + 2)
+                for y in range(j - 1, j + 2) if (x, y) != cell and x >= 0
+                and y >= 0 and x < len(self.grid) and y < len(self.grid[0])]
+
+        return neighbours
 
     def get_next_generation(self) -> Grid:
         """
@@ -147,8 +144,8 @@ class GameOfLife:
             Новое поколение клеток.
         """
         new_grid = deepcopy(self.grid)
-        for i in range(self.cell_height):
-            for j in range(self.cell_width):
+        for i in range(len(self.grid)):
+            for j in range(len(self.grid[i])):
                 a = sum(self.get_neighbours((i, j)))
                 if self.grid[i][j]:
                     if a in (2, 3):
@@ -160,3 +157,8 @@ class GameOfLife:
                         new_grid[i][j] = 1
         self.grid = new_grid
         return self.grid
+
+
+if __name__ == '__main__':
+    game = GameOfLife()
+    game.run()
