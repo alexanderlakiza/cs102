@@ -14,6 +14,7 @@ class GUI(UI):
         self.screen_size = life.cols * self.cell_size, life.rows * self.cell_size
         self.screen = pygame.display.set_mode(self.screen_size)
 
+
     def draw_lines(self) -> None:
         # Copy from previous assignment
         width, height = self.screen_size
@@ -24,6 +25,7 @@ class GUI(UI):
         for y in range(0, height, self.cell_size):
             pygame.draw.line(self.screen, pygame.Color('black'),
                     (0, y), (width, y))
+
 
     def draw_grid(self) -> None:
         # Copy from previous assignment
@@ -38,6 +40,7 @@ class GUI(UI):
                 elif self.life.curr_generation[i][j] == 0:
                     pygame.draw.rect(self.screen, pygame.Color('white'), (x, y, a, b))
 
+
     def run(self) -> None:
         # Copy from previous assignment
         pygame.init()
@@ -47,7 +50,7 @@ class GUI(UI):
 
         running = True
         pause = False
-        while running and not self.life.is_max_generations_exceed:
+        while running and self.life.is_changing and not self.life.is_max_generations_exceed:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     running = False
