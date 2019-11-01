@@ -30,6 +30,7 @@ class GameOfLife:
         # Скорость протекания игры
         self.speed = speed
 
+
     def draw_lines(self) -> None:
         """ Отрисовать сетку """
         for x in range(0, self.width, self.cell_size):
@@ -38,6 +39,7 @@ class GameOfLife:
         for y in range(0, self.height, self.cell_size):
             pygame.draw.line(self.screen, pygame.Color('black'),
                     (0, y), (self.width, y))
+
 
     def run(self) -> None:
         """ Запустить игру """
@@ -64,6 +66,7 @@ class GameOfLife:
             pygame.display.flip()
             clock.tick(self.speed)
         pygame.quit()
+
 
     def create_grid(self, randomize: bool=True) -> Grid:
         """
@@ -133,6 +136,7 @@ class GameOfLife:
                 and y >= 0 and x < len(self.grid) and y < len(self.grid[0])]
 
         return neighbours
+
 
     def get_next_generation(self) -> Grid:
         """
