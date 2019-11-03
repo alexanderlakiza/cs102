@@ -21,7 +21,6 @@ class Console(UI):
         screen.addstr(self.life.rows + 1, 0, '+')
         screen.addstr(0, self.life.cols + 1, '+')
         screen.addstr(self.life.rows + 1, self.life.cols + 1, '+')
-
         for i in range(1, self.life.cols + 1):
             screen.addstr(0, i, '-')
             screen.addstr(self.life.rows + 1, i, '-')
