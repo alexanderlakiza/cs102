@@ -121,8 +121,8 @@ class GameOfLife:
         """
         Сохранить текущее состояние клеток в указанный файл.
         """
-        f = open(filename, 'w')
-        for row in self.curr_generation:
-            for i in row:
-                f.write(str(i))
-            f.write('\n')
+        with open(filename, mode='w') as f:
+            for row in self.curr_generation:
+                for i in row:
+                    f.write(str(i))
+                f.write('\n')

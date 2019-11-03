@@ -20,6 +20,7 @@ def encrypt_caesar(plaintext):
 
     return ciphertext
 # зашифровали
+print(encrypt_caesar('home'))
 
 
 def decrypt_caesar(ciphertext):
@@ -44,3 +45,4 @@ def decrypt_caesar(ciphertext):
             plaintext += chr((ord(ch) - 3 - ord('a')) % 26 + ord('a'))
     return plaintext
 # расшифровали
+print(decrypt_caesar('krph'))
