@@ -128,17 +128,12 @@ def get_schedule(message):
                     times_list, locations_list, rooms_list, lessons_list \
                         = parse_schedule(web_page, day)
                     resp = ''
-                    print(times_list)
-                    print(locations_list)
-                    print(rooms_list)
-
                     for time, location, room, lession in zip(
                             times_list, locations_list, rooms_list,
                             lessons_list):
                         resp += '<b>{}</b>, {}, {}, {}\n'.format(
                             time, location, room, lession)
                     bot.send_message(message.chat.id, resp, parse_mode="HTML")
-                    print(resp)
                 else:
                     bot.send_message(message.chat.id, "Выходной")
             except AttributeError:
