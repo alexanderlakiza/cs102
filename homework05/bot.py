@@ -123,9 +123,12 @@ def get_schedule(message):
         if 'Расписание не найдено' in web_page:
             bot.send_message(message.chat.id, 'Такой группы нет')
         else:
-            week_numbers = ('0','1','2')
+            week_numbers = ('0', '1', '2')
             if len(received_message) == 3 and week not in week_numbers:
-                bot.send_message(message.chat.id, 'Неправильно указана неделя.\nВведите команду <b>/help</b> для справки', parse_mode='HTML')
+                bot.send_message(message.chat.id,
+                                 'Неправильно указана неделя. \
+                                 \nВведите команду <b>/help</b> для справки',
+                                 parse_mode='HTML')
             else:
                 try:
                     if day[1:] != "sunday":
@@ -137,7 +140,8 @@ def get_schedule(message):
                                 lessons_list):
                             resp += '<b>{}</b>, {}, {}, {}\n'.format(
                                 time, location, room, lession)
-                        bot.send_message(message.chat.id, resp, parse_mode="HTML")
+                        bot.send_message(message.chat.id, resp,
+                                         parse_mode="HTML")
                     else:
                         bot.send_message(message.chat.id, "Выходной")
                 except AttributeError:
@@ -218,7 +222,8 @@ def get_near_lesson(message):
                                     rooms_list, lessons_list \
                                     = parse_schedule(web_page, week_day)
                                 resp = ''
-                                resp += '<b>{}\n</b><b>{}</b>, {}, {}, {}\n'.format(
+                                resp += '<b>{}\n</b><b>{}</b>, {}, {}, {}\
+                                    \n'.format(
                                     week[n_day], times_list[0],
                                     locations_list[0],
                                     rooms_list[0], lessons_list[0])
@@ -330,14 +335,17 @@ def get_all_schedule(message):
         if 'Расписание не найдено' in web_page:
             bot.send_message(message.chat.id, 'Такой группы нет')
         else:
-            week_numbers = ('0','1','2')
+            week_numbers = ('0', '1', '2')
             if len(received_message) == 3 and week not in week_numbers:
-                bot.send_message(message.chat.id, 'Неправильно указана неделя.\nВведите команду <b>/help</b> для справки', parse_mode='HTML')
+                bot.send_message(message.chat.id,
+                                 'Неправильно указана неделя.\
+                                 \nВведите команду <b>/help</b> для справки',
+                                 parse_mode='HTML')
             else:
                 week_resp = ['<b>Понедельник:</b>\n', '<b>Вторник:</b>\n',
-                            '<b>Среда:</b>\n', '<b>Четверг:</b>\n',
-                            '<b>Пятница:</b>\n', '<b>Суббота:</b>\n',
-                            '<b>Воскресенье:</b>\n']
+                             '<b>Среда:</b>\n', '<b>Четверг:</b>\n',
+                             '<b>Пятница:</b>\n', '<b>Суббота:</b>\n',
+                             '<b>Воскресенье:</b>\n']
                 week = ['/monday', '/tuesday', '/wednesday',
                         '/thursday', '/friday', '/saturday', '/sunday']
                 resp = ''
