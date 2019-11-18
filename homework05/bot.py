@@ -178,6 +178,11 @@ def get_near_lesson(message):
                 times_list, locations_list, rooms_list, lessons_list \
                     = parse_schedule(web_page, week_day)
                 resp = ''
+                q = times_list[-1]
+                h = q.split('-')
+                start_last = h[0]
+                start_last = start_last.split(':')
+                start_last_minutes = int(start_last[0])*60 + int(start_last[1])
                 for i in range(len(times_list)):
                     k = times_list[i].split('-')
                     start = k[0]
@@ -187,9 +192,40 @@ def get_near_lesson(message):
                         resp += '<b>{}</b>, {}, {}, {}\n'.format(
                             times_list[i], locations_list[i],
                             rooms_list[i], lessons_list[i])
+                        bot.send_message(message.chat.id,
+                                         '<b>Сегодня:\n</b>' + resp,
+                                         parse_mode='HTML')
+                    elif r_n > start_last_minutes:
+                        for _ in range(1, 7):
+                            n_day += 1
+                            if n_day == 7:
+                                n_day = 0
+                                if n_week == "1":
+                                    n_week = "2"
+                                else:
+                                    n_week = "1"
+                            week = ['/monday', '/tuesday', '/wednesday',
+                                    '/thursday', '/friday', '/saturday',
+                                    '/sunday']
+                            week_day = week[n_day]
+                            web_page = get_page(group, n_week)
+                            try:
+                                times_list, locations_list, \
+                                    rooms_list, lessons_list \
+                                    = parse_schedule(web_page, week_day)
+                                resp = ''
+                                resp += '<b>{}\n</b><b>{}</b>, {}, {}, {}\n'.format(
+                                    week[n_day], times_list[0],
+                                    locations_list[0],
+                                    rooms_list[0], lessons_list[0])
+                                bot.send_message(message.chat.id,
+                                                 resp, parse_mode='HTML')
+                                break
+                            except AttributeError:
+                                continue
                     if len(resp) != 0:
                         break
-                bot.send_message(message.chat.id, resp, parse_mode='HTML')
+                # bot.send_message(message.chat.id, resp, parse_mode='HTML')
             except AttributeError:
                 for _ in range(1, 7):
                     n_day += 1
@@ -207,8 +243,8 @@ def get_near_lesson(message):
                         times_list, locations_list, rooms_list, lessons_list \
                             = parse_schedule(web_page, week_day)
                         resp = ''
-                        resp += '<b>{}</b>, {}, {}, {}\n'.format(
-                            times_list[0], locations_list[0],
+                        resp += '<b>{}\n</b><b>{}</b>, {}, {}, {}\n'.format(
+                            week[n_day], times_list[0], locations_list[0],
                             rooms_list[0], lessons_list[0])
                         bot.send_message(message.chat.id,
                                          resp, parse_mode='HTML')
