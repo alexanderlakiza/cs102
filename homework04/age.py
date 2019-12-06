@@ -15,10 +15,8 @@ def age_predict(user_id: int) -> Optional[float]:
     :param user_id: идентификатор пользователя
     :return: медианный возраст пользователя
     """
-    
     assert isinstance(user_id, int), "user_id must be positive integer"
     assert user_id > 0, "user_id must be positive integer"
-    # PUT YOUR CODE HERE
 
     friends = get_friends(user_id,'bdate,sex')
     ages = []
@@ -39,4 +37,4 @@ def age_predict(user_id: int) -> Optional[float]:
     else:
         return None
         
-print(age_predict(369826180))
+print('Средний возраст:',age_predict(369826180))
