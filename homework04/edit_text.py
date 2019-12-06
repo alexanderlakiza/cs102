@@ -146,7 +146,6 @@ texts = inf(texts)
 print(texts)
 
 # magic:
-
 dictionary = gensim.corpora.Dictionary(texts)
 full_text = []
 for i in range(len(texts)):
