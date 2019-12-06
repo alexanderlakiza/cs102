@@ -65,10 +65,6 @@ def get_wall(
 
     return walls
 
-wall = []
-for i in range(1):
-    wall.extend(get_wall(domain='itmoru', count=10, offset=100*i))
-
 
 def del_stopwords(text): 
     """
@@ -133,6 +129,11 @@ def inf(text):
         upd_text = []
     return new_text
 
+
+wall = []
+for i in range(2):
+	for group in ['itmoru','sportsru']:
+		wall.extend(get_wall(domain=group, count=100, offset=100*i))
 
 texts = [[text.lower() for text in lst.split()] for lst in wall]
 print(texts)
