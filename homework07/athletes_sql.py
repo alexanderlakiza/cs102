@@ -111,3 +111,57 @@ cursor.execute(
 )
 print(tabulate(fetch_all(cursor), "keys", "psql"))
 # True
+
+
+# 8. What age category did the fewest and the most participants of the 2014 Olympics belong to?
+# 8. Answer is [45-55] and [15-25) correspondingly
+
+cursor.execute(
+	"""
+	SELECT
+        CASE
+            WHEN 15 <= age AND 25 > age THEN 15
+            WHEN 25 <= age AND 35 > age THEN 25
+            WHEN 35 <= age AND 45 > age THEN 35
+            WHEN 45 <= age AND 55 >= age THEN 45
+        END AS age_group,
+    COUNT (DISTINCT athlete_id)
+    FROM athletes_events
+    WHERE year = 2014
+    GROUP BY age_group
+	"""
+)
+print(tabulate(fetch_all(cursor), "keys", "psql"))
+# 45 and 15
+
+
+# 9. Is it true that there were Summer Olympics held in Lake Placid?
+# Is it true that there were Winter Olympics held in Sankt Moritz?
+# 9. Answer is No, Yes
+
+cursor.execute(
+	"""
+	SELECT (SELECT COUNT(*) > 0
+	FROM athletes_events
+	WHERE city = 'Lake Placid' and season = 'Summer') as first,
+	(SELECT COUNT(*) > 0 FROM athletes_events
+	WHERE city = 'Sankt Moritz' and season = 'Winter') as second
+	"""
+)
+print(tabulate(fetch_all(cursor), "keys", "psql"))
+# False, True 
+
+
+# 10. What is the absolute difference between the number of unique sports at the 1995 Olympics and 2016 Olympics?
+# 10. Answer is 34
+
+cursor.execute("""
+	SELECT ABS(
+	(SELECT COUNT (DISTINCT sport) FROM athletes_events where year = 1995)-
+	(SELECT COUNT (DISTINCT sport) FROM athletes_events where year = 2016))
+	"""
+)
+print(tabulate(fetch_all(cursor), "keys", "psql"))
+# 34
+# in 1995 there were no olympics
+# if there's a mistake (not 1995, but 1996) then the answer must be 3
