@@ -114,7 +114,7 @@ print(tabulate(fetch_all(cursor), "keys", "psql"))
 
 
 # 8. What age category did the fewest and the most participants of the 2014 Olympics belong to?
-# 8. Answer is [45-55] and [15-25) correspondingly
+# 8. Answer is [45-55] and [25-35) correspondingly
 
 cursor.execute(
 	"""
@@ -132,7 +132,7 @@ cursor.execute(
 	"""
 )
 print(tabulate(fetch_all(cursor), "keys", "psql"))
-# 45 and 15
+# 45 and 25
 
 
 # 9. Is it true that there were Summer Olympics held in Lake Placid?
