@@ -5,6 +5,7 @@
 * work w/ [Heroku](https://www.heroku.com/)
 * requests module
 * datetime module
+* BeautifulSoup module
 ---
 The [description](https://dementiy.github.io/assignments/telegram/) of the assignment.
 
