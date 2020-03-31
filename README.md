@@ -13,7 +13,7 @@ This is my first experince of coding, working with languages, modules, etc. So, 
 ---
 
 ###### Who am I?
-I am a freshman [ITMO University](https://itmo.ru/ru/) student studying 45.03.04 [Intelligent systems in the humanitarian sphere](https://abit.itmo.ru/program/13275/) (the group id is K3142).
+My name is Alexander Lakiza. I am a freshman [ITMO University](https://itmo.ru/ru/) student studying 45.03.04 [Intelligent systems in the humanitarian sphere](https://abit.itmo.ru/program/13275/) (the group id is K3142).
 ###### Where you can find me?
 * [VK](https://vk.com/alexanderlakiza)
 * [Instagram](https://www.instagram.com/alexanderlakiza/)
