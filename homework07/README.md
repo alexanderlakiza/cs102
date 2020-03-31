@@ -18,5 +18,5 @@ The [description](https://github.com/Dementiy/old-Dementiy.github.io/blob/source
 7. Do the same tasks for both datasets but using R lang with its 'dplyr' and 'plotly' modules
 
 ###### Notes:
-The task may slightly change over time, therefore, my assignment might be not up-to-date
+The task may slightly change over time, therefore, my assignment might be not up-to-date.
 The [inititial](https://github.com/Dementiy/old-Dementiy.github.io/blob/source/_posts/2017-11-22-11-descriptive-statistics.markdown) description of the task is scarce, so I decided to add it myself
